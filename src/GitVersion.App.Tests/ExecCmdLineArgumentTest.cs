@@ -73,7 +73,7 @@ public class ExecCmdLineArgumentTest
     public void WorkingDirectoryDoesNotExistFailsWithInformativeMessage()
     {
         var workingDirectory = Path.Combine(PathHelper.GetCurrentDirectory(), Guid.NewGuid().ToString("N"));
-        var executable = PathHelper.GetExecutable();
+        var executable = PathHelper.GetDotNetExecutable();
 
         var output = new StringBuilder();
         var args = PathHelper.GetExecutableArgs($" /targetpath {workingDirectory} ");

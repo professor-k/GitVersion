@@ -1,11 +1,6 @@
 using GitTools.Testing;
 using GitVersion.BuildAgents;
 using GitVersion.Core.Tests;
-
-#if NET48
-using GitVersion.Extensions;
-#endif
-
 using GitVersion.MsBuild.Tests.Mocks;
 
 namespace GitVersion.MsBuild.Tests.Helpers;

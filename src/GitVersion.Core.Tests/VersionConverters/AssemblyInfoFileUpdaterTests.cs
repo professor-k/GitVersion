@@ -34,8 +34,6 @@ public class AssemblyInfoFileUpdaterTests : TestBase
     [TestCase("cs")]
     [TestCase("fs")]
     [TestCase("vb")]
-    [Category(NoMono)]
-    [Description(NoMonoDescription)]
     public void ShouldCreateAssemblyInfoFileWhenNotExistsAndEnsureAssemblyInfo(string fileExtension)
     {
         var workingDir = Path.GetTempPath();
@@ -52,8 +50,6 @@ public class AssemblyInfoFileUpdaterTests : TestBase
     [TestCase("cs")]
     [TestCase("fs")]
     [TestCase("vb")]
-    [Category(NoMono)]
-    [Description(NoMonoDescription)]
     public void ShouldCreateAssemblyInfoFileAtPathWhenNotExistsAndEnsureAssemblyInfo(string fileExtension)
     {
         var workingDir = Path.GetTempPath();
@@ -70,8 +66,6 @@ public class AssemblyInfoFileUpdaterTests : TestBase
     [TestCase("cs")]
     [TestCase("fs")]
     [TestCase("vb")]
-    [Category(NoMono)]
-    [Description(NoMonoDescription)]
     public void ShouldCreateAssemblyInfoFilesAtPathWhenNotExistsAndEnsureAssemblyInfo(string fileExtension)
     {
         var workingDir = Path.GetTempPath();
@@ -161,8 +155,6 @@ public class AssemblyInfoFileUpdaterTests : TestBase
     [TestCase("cs", "[assembly: AssemblyFileVersion(\"1.0.0.0\")]")]
     [TestCase("fs", "[<assembly: AssemblyFileVersion(\"1.0.0.0\")>]")]
     [TestCase("vb", "<Assembly: AssemblyFileVersion(\"1.0.0.0\")>")]
-    [Category(NoMono)]
-    [Description(NoMonoDescription)]
     public void ShouldNotReplaceAssemblyVersionWhenVersionSchemeIsNone(string fileExtension, string assemblyFileContent)
     {
         var workingDir = Path.GetTempPath();
@@ -374,8 +366,6 @@ public class AssemblyInfoFileUpdaterTests : TestBase
     [TestCase("cs", "[assembly: AssemblyVersion(\"1.0.0.0\")]\r\n[assembly: AssemblyFileVersion(\"1.0.0.0\")]")]
     [TestCase("fs", "[<assembly: AssemblyVersion(\"1.0.0.0\")>]\r\n[<assembly: AssemblyFileVersion(\"1.0.0.0\")>]")]
     [TestCase("vb", "<Assembly: AssemblyVersion(\"1.0.0.0\")>\r\n<Assembly: AssemblyFileVersion(\"1.0.0.0\")>")]
-    [Category(NoMono)]
-    [Description(NoMonoDescription)]
     public void ShouldAddAssemblyInformationalVersionWhenUpdatingAssemblyVersionFile(string fileExtension, string assemblyFileContent)
     {
         var workingDir = Path.GetTempPath();
@@ -395,8 +385,6 @@ public class AssemblyInfoFileUpdaterTests : TestBase
     [TestCase("cs", "[assembly: AssemblyVersion(\"1.0.0.0\")]\r\n[assembly: AssemblyFileVersion(\"1.0.0.0\")]\r\n// comment\r\n")]
     [TestCase("fs", "[<assembly: AssemblyVersion(\"1.0.0.0\")>]\r\n[<assembly: AssemblyFileVersion(\"1.0.0.0\")>]\r\ndo\r\n()\r\n")]
     [TestCase("vb", "<Assembly: AssemblyVersion(\"1.0.0.0\")>\r\n<Assembly: AssemblyFileVersion(\"1.0.0.0\")>\r\n' comment\r\n")]
-    [Category(NoMono)]
-    [Description(NoMonoDescription)]
     public void Issue1183ShouldAddFSharpAssemblyInformationalVersionBesideOtherAttributes(string fileExtension, string assemblyFileContent)
     {
         var workingDir = Path.GetTempPath();
@@ -416,8 +404,6 @@ public class AssemblyInfoFileUpdaterTests : TestBase
     [TestCase("cs", "[assembly: AssemblyFileVersion(\"1.0.0.0\")]")]
     [TestCase("fs", "[<assembly: AssemblyFileVersion(\"1.0.0.0\")>]")]
     [TestCase("vb", "<Assembly: AssemblyFileVersion(\"1.0.0.0\")>")]
-    [Category(NoMono)]
-    [Description(NoMonoDescription)]
     public void ShouldNotAddAssemblyInformationalVersionWhenVersionSchemeIsNone(string fileExtension, string assemblyFileContent)
     {
         var workingDir = Path.GetTempPath();

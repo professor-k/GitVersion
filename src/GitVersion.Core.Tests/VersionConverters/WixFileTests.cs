@@ -16,8 +16,6 @@ internal class WixFileTests : TestBase
     public void Setup() => ShouldlyConfiguration.ShouldMatchApprovedDefaults.LocateTestMethodUsingAttribute<TestAttribute>();
 
     [Test]
-    [Category(NoMono)]
-    [Description(NoMonoDescription)]
     public void UpdateWixVersionFile()
     {
         var workingDir = Path.GetTempPath();
@@ -59,8 +57,6 @@ internal class WixFileTests : TestBase
     }
 
     [Test]
-    [Category(NoMono)]
-    [Description(NoMonoDescription)]
     public void UpdateWixVersionFileWhenFileAlreadyExists()
     {
         var workingDir = Path.GetTempPath();
