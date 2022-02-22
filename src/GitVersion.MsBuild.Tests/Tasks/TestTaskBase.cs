@@ -1,5 +1,6 @@
 using GitTools.Testing;
 using GitVersion.BuildAgents;
+using GitVersion.Configuration;
 using GitVersion.Core.Tests.Helpers;
 using GitVersion.MsBuild.Tests.Helpers;
 using LibGit2Sharp;
@@ -116,7 +117,7 @@ public class TestTaskBase : TestBase
 
     private static void CreateConfiguration(string repoFolder, string content)
     {
-        var configFilePath = Path.Combine(repoFolder, Configuration.ConfigFileLocator.DefaultFileName);
+        var configFilePath = Path.Combine(repoFolder, ConfigFileLocator.DefaultFileName);
         File.WriteAllText(configFilePath, content);
     }
 }

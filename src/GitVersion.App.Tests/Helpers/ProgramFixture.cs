@@ -40,9 +40,9 @@ public sealed class ProgramFixture
 
     public void WithEnv(params KeyValuePair<string, string>[] envs)
     {
-        foreach (var env in envs)
+        foreach (var (key, value) in envs)
         {
-            this.environment.SetEnvironmentVariable(env.Key, env.Value);
+            this.environment.SetEnvironmentVariable(key, value);
         }
     }
 

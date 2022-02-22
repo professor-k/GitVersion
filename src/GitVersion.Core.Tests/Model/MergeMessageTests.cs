@@ -145,7 +145,7 @@ public class MergeMessageTests : TestBase
         sut.Version.ShouldBe(expectedVersion);
     }
 
-    private static readonly object[] BitBucketPullMergeMessagesv7 =
+    private static readonly object[] BitBucketPullMergeMessages_v7 =
     {
         new object[] { $@"Pull request #68: Release/2.2
 
@@ -154,8 +154,8 @@ Merge in aaa/777 from release/2.2 to {MainBranch}
 * commit '750aa37753dec1a85b22cc16db851187649d9e97':", "release/2.2", MainBranch, new SemanticVersion(2,2), 68  }
     };
 
-    [TestCaseSource(nameof(BitBucketPullMergeMessagesv7))]
-    public void ParsesBitBucketPullMergeMessagev7(
+    [TestCaseSource(nameof(BitBucketPullMergeMessages_v7))]
+    public void ParsesBitBucketPullMergeMessage_v7(
         string message,
         string expectedMergedBranch,
         string expectedTargetBranch,
@@ -266,7 +266,7 @@ Merge in aaa/777 from release/2.2 to {MainBranch}
     {
         // Arrange
         const string message = "My custom message";
-        const string definition = "Mycustom";
+        const string definition = "MyCustom";
         this.config.MergeMessageFormats = new Dictionary<string, string>
         {
             [definition] = message
@@ -289,7 +289,7 @@ Merge in aaa/777 from release/2.2 to {MainBranch}
     {
         // Arrange
         const string format = "My custom message";
-        const string definition = "Mycustom";
+        const string definition = "MyCustom";
         this.config.MergeMessageFormats = new Dictionary<string, string>
         {
             ["Default2"] = "some example",
@@ -314,7 +314,7 @@ Merge in aaa/777 from release/2.2 to {MainBranch}
     {
         // Arrange
         const string format = @"^Merged PR #(?<PullRequestNumber>\d+) into (?<TargetBranch>[^\s]*) from (?:(?<SourceBranch>[^\s]*))";
-        const string definition = "Mycustom";
+        const string definition = "MyCustom";
         this.config.MergeMessageFormats = new Dictionary<string, string>
         {
             [definition] = format
@@ -340,7 +340,7 @@ Merge in aaa/777 from release/2.2 to {MainBranch}
     {
         // Arrange
         const string format = @"^Merge (branch|tag) '(?<SourceBranch>[^']*)'(?: into (?<TargetBranch>[^\s]*))*";
-        const string definition = "Mycustom";
+        const string definition = "MyCustom";
         this.config.MergeMessageFormats = new Dictionary<string, string>
         {
             [definition] = format,

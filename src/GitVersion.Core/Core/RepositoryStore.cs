@@ -239,7 +239,7 @@ public class RepositoryStore : IRepositoryStore
 
         // Yielding part is split from the main part of the method to avoid having the exception check performed lazily.
         // Details at https://github.com/GitTools/GitVersion/issues/2755
-        static IEnumerable<IBranch> InnerGetBranchesContainingCommit(ICommit commit, IEnumerable<IBranch>? branches, bool onlyTrackedBranches, IGitRepository repository, ILog log)
+        static IEnumerable<IBranch> InnerGetBranchesContainingCommit(IGitObject commit, IEnumerable<IBranch>? branches, bool onlyTrackedBranches, IGitRepository repository, ILog log)
         {
             branches ??= repository.Branches.ToList();
 
@@ -463,7 +463,7 @@ public class RepositoryStore : IRepositoryStore
         return branchMergeBases;
     }
 
-    private static IEnumerable<ICommit> GetCommitsReacheableFrom(IGitRepository repository, ICommit commit, IBranch branch)
+    private static IEnumerable<ICommit> GetCommitsReacheableFrom(IGitRepository repository, IGitObject commit, IBranch branch)
     {
         var filter = new CommitFilter
         {

@@ -22,9 +22,9 @@ public class GitVersionTaskExecutor : IGitVersionTaskExecutor
     {
         var versionVariables = VersionVariables.FromFile(task.VersionFile, fileSystem);
         var outputType = typeof(GetVersion);
-        foreach (var variable in versionVariables)
+        foreach (var (key, value) in versionVariables)
         {
-            outputType.GetProperty(variable.Key)?.SetValue(task, variable.Value, null);
+            outputType.GetProperty(key)?.SetValue(task, value, null);
         }
     }
 

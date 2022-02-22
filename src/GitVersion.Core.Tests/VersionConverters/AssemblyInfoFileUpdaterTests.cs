@@ -169,7 +169,7 @@ public class AssemblyInfoFileUpdaterTests : TestBase
         var assemblyInfoFile = "AssemblyInfo." + fileExtension;
         var fileName = Path.Combine(workingDir, assemblyInfoFile);
 
-        VerifyAssemblyInfoFile(assemblyFileContent, fileName, AssemblyVersioningScheme.None, verify: (fs, variables) =>
+        VerifyAssemblyInfoFile(assemblyFileContent, fileName, AssemblyVersioningScheme.None, (fs, variables) =>
         {
             using var assemblyInfoFileUpdater = new AssemblyInfoFileUpdater(this.log, fs);
             assemblyInfoFileUpdater.Execute(variables, new AssemblyInfoContext(workingDir, false, assemblyInfoFile));
@@ -245,7 +245,7 @@ public class AssemblyInfoFileUpdaterTests : TestBase
     [TestCase("cs", "[assembly: AssemblyVersionAttribute(\"1.0.0.0\")]\r\n[assembly: AssemblyInformationalVersionAttribute(\"1.0.0.0\")]\r\n[assembly: AssemblyFileVersionAttribute(\"1.0.0.0\")]")]
     [TestCase("fs", "[<assembly: AssemblyVersionAttribute(\"1.0.0.0\")>]\r\n[<assembly: AssemblyInformationalVersionAttribute(\"1.0.0.0\")>]\r\n[<assembly: AssemblyFileVersionAttribute(\"1.0.0.0\")>]")]
     [TestCase("vb", "<Assembly: AssemblyVersionAttribute(\"1.0.0.0\")>\r\n<Assembly: AssemblyInformationalVersionAttribute(\"1.0.0.0\")>\r\n<Assembly: AssemblyFileVersionAttribute(\"1.0.0.0\")>")]
-    public void ShouldReplaceAssemblyVersionWithAtttributeSuffix(string fileExtension, string assemblyFileContent)
+    public void ShouldReplaceAssemblyVersionWithAttributeSuffix(string fileExtension, string assemblyFileContent)
     {
         var workingDir = Path.GetTempPath();
         var assemblyInfoFile = "AssemblyInfo." + fileExtension;
@@ -424,7 +424,7 @@ public class AssemblyInfoFileUpdaterTests : TestBase
         var assemblyInfoFile = "AssemblyInfo." + fileExtension;
         var fileName = Path.Combine(workingDir, assemblyInfoFile);
 
-        VerifyAssemblyInfoFile(assemblyFileContent, fileName, AssemblyVersioningScheme.None, verify: (fs, variables) =>
+        VerifyAssemblyInfoFile(assemblyFileContent, fileName, AssemblyVersioningScheme.None, (fs, variables) =>
         {
             using var assemblyInfoFileUpdater = new AssemblyInfoFileUpdater(this.log, fs);
             assemblyInfoFileUpdater.Execute(variables, new AssemblyInfoContext(workingDir, false, assemblyInfoFile));
@@ -457,7 +457,7 @@ public class AssemblyInfoFileUpdaterTests : TestBase
             this.fileSystem.ReadAllText(fileName).Returns(assemblyFileContent);
         });
 
-        var config = new TestEffectiveConfiguration(assemblyVersioningScheme: versioningScheme);
+        var config = new TestEffectiveConfiguration(versioningScheme);
         var variables = this.variableProvider.GetVariablesFor(version, config, false);
 
         verify?.Invoke(this.fileSystem, variables);

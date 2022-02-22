@@ -27,7 +27,7 @@ public class ExecCmdLineArgumentTest
         fixture.MakeATaggedCommit("1.2.3");
         fixture.MakeACommit();
 
-        var result = GitVersionHelper.ExecuteIn(fixture.RepositoryPath, arguments: @" /l ""/tmp/path""", logToFile: false);
+        var result = GitVersionHelper.ExecuteIn(fixture.RepositoryPath, @" /l ""/tmp/path""", false);
 
         result.ExitCode.ShouldBe(0);
         result.Output.ShouldContain(@"""MajorMinorPatch"": ""1.2.4""");
@@ -43,7 +43,7 @@ public class ExecCmdLineArgumentTest
         fixture.MakeATaggedCommit("1.2.3");
         fixture.MakeACommit();
 
-        var result = GitVersionHelper.ExecuteIn(fixture.RepositoryPath, arguments: $@" {verbosityArg} -output buildserver /l ""/tmp/path""", logToFile: false);
+        var result = GitVersionHelper.ExecuteIn(fixture.RepositoryPath, $@" {verbosityArg} -output buildserver /l ""/tmp/path""", false);
 
         result.ExitCode.ShouldBe(0);
         result.Output.ShouldContain(expectedOutput);
@@ -52,7 +52,7 @@ public class ExecCmdLineArgumentTest
     [Test]
     public void WorkingDirectoryWithoutGitFolderFailsWithInformativeMessage()
     {
-        var result = GitVersionHelper.ExecuteIn(System.Environment.SystemDirectory, arguments: null, logToFile: false);
+        var result = GitVersionHelper.ExecuteIn(System.Environment.SystemDirectory, null, false);
 
         result.ExitCode.ShouldNotBe(0);
         result.Output.ShouldContain("Cannot find the .git directory");
@@ -63,7 +63,7 @@ public class ExecCmdLineArgumentTest
     {
         using var fixture = new EmptyRepositoryFixture();
 
-        var result = GitVersionHelper.ExecuteIn(fixture.RepositoryPath, arguments: null, logToFile: false);
+        var result = GitVersionHelper.ExecuteIn(fixture.RepositoryPath, null, false);
 
         result.ExitCode.ShouldNotBe(0);
         result.Output.ShouldContain("No commits found on the current branch.");

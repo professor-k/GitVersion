@@ -189,7 +189,7 @@ public class ArgumentParser : IArgumentParser
         throw new WarningException(couldNotParseMessage);
     }
 
-    private static bool ParseSwitches(Arguments arguments, string name, string[] values, string value)
+    private static bool ParseSwitches(Arguments arguments, string name, IReadOnlyList<string> values, string value)
     {
         if (name.IsSwitch("l"))
         {
@@ -452,7 +452,7 @@ public class ArgumentParser : IArgumentParser
         {
             arguments.UpdateAssemblyInfo = false;
         }
-        else if (values != null && values.Count > 1)
+        else if (values is { Count: > 1 })
         {
             arguments.UpdateAssemblyInfo = true;
             foreach (var v in values)
@@ -493,7 +493,7 @@ public class ArgumentParser : IArgumentParser
         {
             arguments.UpdateProjectFiles = false;
         }
-        else if (values != null && values.Count > 1)
+        else if (values is { Count: > 1 })
         {
             arguments.UpdateProjectFiles = true;
             foreach (var v in values)
@@ -526,7 +526,7 @@ public class ArgumentParser : IArgumentParser
 
     private static void EnsureArgumentValueCount(IReadOnlyList<string> values)
     {
-        if (values != null && values.Count > 1)
+        if (values is { Count: > 1 })
         {
             throw new WarningException($"Could not parse command line parameter '{values[1]}'.");
         }

@@ -44,7 +44,7 @@ public class GitVersionCache : IGitVersionCache
             }
         }
 
-        var retryOperation = new RetryAction<IOException>(maxRetries: 6);
+        var retryOperation = new RetryAction<IOException>(6);
         retryOperation.Execute(WriteCacheOperation);
     }
 

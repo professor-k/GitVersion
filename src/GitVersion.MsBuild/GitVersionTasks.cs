@@ -36,7 +36,7 @@ public static class GitVersionTasks
         }
         catch (Exception exception)
         {
-            taskLog.LogErrorFromException(exception, showStackTrace: true, showDetail: true, null);
+            taskLog.LogErrorFromException(exception, true, true, null);
             return false;
         }
 

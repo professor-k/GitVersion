@@ -26,7 +26,7 @@ public class GitVersionContextFactory : IGitVersionContextFactory
         if (currentBranch == null)
             throw new InvalidOperationException("Need a branch to operate on");
 
-        var configuration = this.configProvider.Provide(overrideConfig: this.options.Value.ConfigInfo.OverrideConfig);
+        var configuration = this.configProvider.Provide(this.options.Value.ConfigInfo.OverrideConfig);
 
         var currentCommit = this.repositoryStore.GetCurrentCommit(currentBranch, gitVersionOptions?.RepositoryInfo.CommitId);
 

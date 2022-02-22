@@ -36,15 +36,10 @@ public class TrackReleaseBranchesVersionStrategy : VersionStrategyBase
         this.taggedCommitVersionStrategy = new TaggedCommitVersionStrategy(repositoryStore, versionContext);
     }
 
-    public override IEnumerable<BaseVersion> GetVersions()
-    {
-        if (Context.Configuration?.TracksReleaseBranches == true)
-        {
-            return ReleaseBranchBaseVersions().Union(MainTagsVersions());
-        }
-
-        return Array.Empty<BaseVersion>();
-    }
+    public override IEnumerable<BaseVersion> GetVersions() =>
+        Context.Configuration?.TracksReleaseBranches == true
+            ? ReleaseBranchBaseVersions().Union(MainTagsVersions())
+            : Array.Empty<BaseVersion>();
 
     private IEnumerable<BaseVersion> MainTagsVersions()
     {

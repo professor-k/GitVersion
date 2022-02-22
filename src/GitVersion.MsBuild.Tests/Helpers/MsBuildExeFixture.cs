@@ -3,10 +3,14 @@ using Buildalyzer.Environment;
 using GitTools.Testing;
 using GitVersion.Core.Tests;
 using GitVersion.Core.Tests.Helpers;
+
+#if NET48
+using GitVersion.Extensions;
+#endif
+
 using Microsoft.Build.Framework;
 using Microsoft.Build.Logging;
 using Microsoft.Build.Utilities.ProjectCreation;
-using StringWriter = System.IO.StringWriter;
 
 namespace GitVersion.MsBuild.Tests.Helpers;
 
@@ -45,9 +49,9 @@ public class MsBuildExeFixture
 
         if (this.environmentVariables != null)
         {
-            foreach (var pair in this.environmentVariables)
+            foreach (var (key, value) in this.environmentVariables)
             {
-                analyzer.SetEnvironmentVariable(pair.Key, pair.Value);
+                analyzer.SetEnvironmentVariable(key, value);
             }
         }
 

@@ -231,7 +231,7 @@ internal class MainlineVersionCalculator : IMainlineVersionCalculator
         return (null, null);
     }
 
-    private SemanticVersion IncrementForEachCommit(IEnumerable<ICommit> directCommits, SemanticVersion mainlineVersion, IBranch mainline)
+    private SemanticVersion IncrementForEachCommit(IEnumerable<ICommit> directCommits, SemanticVersion mainlineVersion, INamedReference mainline)
     {
         foreach (var directCommit in directCommits)
         {

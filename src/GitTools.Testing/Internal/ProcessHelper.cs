@@ -81,8 +81,6 @@ public static class ProcessHelper
         if (output == null)
             throw new ArgumentNullException(nameof(output));
 
-        workingDirectory ??= Environment.CurrentDirectory;
-
         var psi = new ProcessStartInfo
         {
             UseShellExecute = false,
@@ -96,23 +94,31 @@ public static class ProcessHelper
             FileName = exe,
             Arguments = args
         };
-        foreach (var environmentalVariable in environmentalVariables)
+        foreach (var (key, value) in environmentalVariables)
         {
-            if (psi.EnvironmentVariables.ContainsKey(environmentalVariable.Key))
+            var psiEnvironmentVariables = psi.EnvironmentVariables;
+            if (psiEnvironmentVariables.ContainsKey(key) && string.IsNullOrEmpty(value))
             {
-                psi.EnvironmentVariables[environmentalVariable.Key] = environmentalVariable.Value;
+                psiEnvironmentVariables.Remove(key);
+            }
+            else if (psiEnvironmentVariables.ContainsKey(key))
+            {
+                psiEnvironmentVariables[key] = value;
             }
             else
             {
-                psi.EnvironmentVariables.Add(environmentalVariable.Key, environmentalVariable.Value);
-            }
-            if (psi.EnvironmentVariables.ContainsKey(environmentalVariable.Key) && environmentalVariable.Value == null)
-            {
-                psi.EnvironmentVariables.Remove(environmentalVariable.Key);
+                psiEnvironmentVariables.Add(key, value);
             }
         }
 
         using var process = Start(psi);
+
+        if (process is null)
+        {
+            // FIX ME: What error code do you want to return?
+            return -1;
+        }
+
         using var mreOut = new ManualResetEvent(false);
         using var mreErr = new ManualResetEvent(false);
         process.EnableRaisingEvents = true;
@@ -160,7 +166,7 @@ public static class ProcessHelper
     }
 
     [Flags]
-    public enum ErrorModes
+    private enum ErrorModes
     {
         Default = 0x0,
         FailCriticalErrors = 0x1,
@@ -169,7 +175,7 @@ public static class ProcessHelper
         NoOpenFileErrorBox = 0x8000
     }
 
-    private struct ChangeErrorMode : IDisposable
+    private readonly struct ChangeErrorMode : IDisposable
     {
         private readonly int oldMode;
 

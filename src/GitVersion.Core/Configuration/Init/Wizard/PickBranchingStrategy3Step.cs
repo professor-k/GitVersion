@@ -31,7 +31,7 @@ public class PickBranchingStrategy3Step : ConfigInitWizardStep
         return StepResult.Ok();
     }
 
-    protected override string GetPrompt(Config config, string workingDirectory) => "Do you need to build nightlies or consume packages the CI build creates without releasing those versions? (y/n)";
+    protected override string GetPrompt(Config config, string workingDirectory) => "Do you need to build nightly or consume packages the CI build creates without releasing those versions? (y/n)";
 
     protected override string? DefaultResult => null;
 }

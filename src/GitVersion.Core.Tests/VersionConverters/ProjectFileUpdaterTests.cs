@@ -273,7 +273,7 @@ public class ProjectFileUpdaterTests : TestBase
     {
         var fileName = Path.Combine(Path.GetTempPath(), "TestProject.csproj");
 
-        VerifyAssemblyInfoFile(xml, fileName, AssemblyVersioningScheme.MajorMinorPatch, verify: (fs, variables) =>
+        VerifyAssemblyInfoFile(xml, fileName, AssemblyVersioningScheme.MajorMinorPatch, (fs, variables) =>
         {
             using var projFileUpdater = new ProjectFileUpdater(this.log, fs);
             projFileUpdater.Execute(variables, new AssemblyInfoContext(Path.GetTempPath(), false, fileName));
@@ -317,7 +317,7 @@ public class ProjectFileUpdaterTests : TestBase
             this.fileSystem.ReadAllText(fileName).Returns(projectFileContent);
         });
 
-        var config = new TestEffectiveConfiguration(assemblyVersioningScheme: versioningScheme);
+        var config = new TestEffectiveConfiguration(versioningScheme);
         var variables = this.variableProvider.GetVariablesFor(version, config, false);
 
         verify?.Invoke(this.fileSystem, variables);

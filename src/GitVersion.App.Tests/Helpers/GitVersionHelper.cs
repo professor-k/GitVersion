@@ -50,15 +50,15 @@ public static class GitVersionHelper
             { SpaceAutomation.EnvironmentVariableName, null }
         };
 
-        foreach (var environment in environments)
+        foreach (var (key, value) in environments)
         {
-            if (environmentalVariables.ContainsKey(environment.Key))
+            if (environmentalVariables.ContainsKey(key))
             {
-                environmentalVariables[environment.Key] = environment.Value;
+                environmentalVariables[key] = value;
             }
             else
             {
-                environmentalVariables.Add(environment.Key, environment.Value);
+                environmentalVariables.Add(key, value);
             }
         }
 

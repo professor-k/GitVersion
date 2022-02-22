@@ -98,7 +98,7 @@ public class IncrementStrategyFinder : IIncrementStrategyFinder
     /// Get the sequence of commits in a <paramref name="repo"/> between a <paramref name="baseCommit"/> (exclusive)
     /// and a particular <paramref name="headCommit"/> (inclusive)
     /// </summary>
-    private IEnumerable<ICommit> GetIntermediateCommits(IGitRepository repo, ICommit baseCommit, ICommit? headCommit)
+    private IEnumerable<ICommit> GetIntermediateCommits(IGitRepository repo, IGitObject baseCommit, ICommit? headCommit)
     {
         var map = GetHeadCommitsMap(repo, headCommit);
         if (!map.TryGetValue(baseCommit.Sha, out var baseIndex)) return Enumerable.Empty<ICommit>();

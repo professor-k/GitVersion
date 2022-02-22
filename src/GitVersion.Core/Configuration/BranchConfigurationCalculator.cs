@@ -131,7 +131,7 @@ public class BranchConfigurationCalculator : IBranchConfigurationCalculator
             {
                 // TODO We should call the build server to generate this exception, each build server works differently
                 // for fetch issues and we could give better warnings.
-                throw new InvalidOperationException("Gitversion could not determine which branch to treat as the development branch (default is 'develop') nor releaseable branch (default is 'main' or 'master'), either locally or remotely. Ensure the local clone and checkout match the requirements or considering using 'GitVersion Dynamic Repositories'");
+                throw new InvalidOperationException("Gitversion could not determine which branch to treat as the development branch (default is 'develop') nor release-able branch (default is 'main' or 'master'), either locally or remotely. Ensure the local clone and checkout match the requirements or considering using 'GitVersion Dynamic Repositories'");
             }
 
             this.log.Warning($"{errorMessage}{System.Environment.NewLine}Falling back to {chosenBranch} branch config");
@@ -154,7 +154,7 @@ public class BranchConfigurationCalculator : IBranchConfigurationCalculator
                 };
             }
 
-            var inheritingBranchConfig = GetBranchConfiguration(chosenBranch, currentCommit, configuration, excludedInheritBranches)!;
+            var inheritingBranchConfig = GetBranchConfiguration(chosenBranch, currentCommit, configuration, excludedInheritBranches);
             var configIncrement = inheritingBranchConfig.Increment;
             if (inheritingBranchConfig.Name!.IsEquivalentTo(FallbackConfigName) && configIncrement == IncrementStrategy.Inherit)
             {

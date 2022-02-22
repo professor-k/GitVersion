@@ -1,4 +1,5 @@
 using GitVersion.Model.Configuration;
+using YamlDotNet.Serialization;
 
 namespace GitVersion;
 
@@ -24,10 +25,10 @@ internal class OverrideConfigOptionParser
         .Where(
             pi => IsSupportedPropertyType(pi.PropertyType)
                   && pi.CanWrite
-                  && pi.GetCustomAttributes(typeof(YamlDotNet.Serialization.YamlMemberAttribute), false).Length > 0
+                  && pi.GetCustomAttributes(typeof(YamlMemberAttribute), false).Length > 0
         )
         .ToLookup(
-            pi => (pi.GetCustomAttributes(typeof(YamlDotNet.Serialization.YamlMemberAttribute), false)[0] as YamlDotNet.Serialization.YamlMemberAttribute)?.Alias,
+            pi => (pi.GetCustomAttributes(typeof(YamlMemberAttribute), false)[0] as YamlMemberAttribute)?.Alias,
             pi => pi
         );
 

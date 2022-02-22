@@ -181,11 +181,11 @@ public class NextVersionCalculatorTests : TestBase
         var config = new Config
         {
             VersioningMode = VersioningMode.Mainline,
-            Branches = new Dictionary<string, BranchConfig>()
+            Branches = new Dictionary<string, BranchConfig>
             {
                 { "feature", new BranchConfig { Increment = IncrementStrategy.Minor } }
             },
-            Ignore = new IgnoreConfig() { ShAs = new List<string>() },
+            Ignore = new IgnoreConfig { ShAs = new List<string>() },
             MergeMessageFormats = new Dictionary<string, string>()
         };
 
@@ -210,11 +210,11 @@ public class NextVersionCalculatorTests : TestBase
         var config = new Config
         {
             VersioningMode = VersioningMode.Mainline,
-            Branches = new Dictionary<string, BranchConfig>()
+            Branches = new Dictionary<string, BranchConfig>
             {
                 { "feature", new BranchConfig { Increment = IncrementStrategy.Minor } }
             },
-            Ignore = new IgnoreConfig() { ShAs = new List<string>() },
+            Ignore = new IgnoreConfig { ShAs = new List<string>() },
             MergeMessageFormats = new Dictionary<string, string>()
         };
 

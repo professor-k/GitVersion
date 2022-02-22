@@ -71,16 +71,14 @@ internal class UpdateWixVersionFileTests
     private static Dictionary<string, string> GetGitVersionVarsInWixFile(string file)
     {
         var gitVersionVarsInWix = new Dictionary<string, string>();
-        using (var reader = new XmlTextReader(file))
+        using var reader = new XmlTextReader(file);
+        while (reader.Read())
         {
-            while (reader.Read())
-            {
-                if (reader.Name == "define")
-                {
-                    var component = reader.Value.Split('=');
-                    gitVersionVarsInWix[component[0]] = component[1].TrimStart('"').TrimEnd('"');
-                }
-            }
+            if (reader.Name != "define")
+                continue;
+
+            var component = reader.Value.Split('=');
+            gitVersionVarsInWix[component[0]] = component[1].TrimStart('"').TrimEnd('"');
         }
         return gitVersionVarsInWix;
     }

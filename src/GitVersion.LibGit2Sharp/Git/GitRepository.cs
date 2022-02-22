@@ -117,17 +117,19 @@ internal sealed class GitRepository : IMutatingGitRepository
 
             var refs = remoteTips.Where(r => r.TargetIdentifier == headTipSha).ToList();
 
-            if (refs.Count == 0)
+            switch (refs.Count)
             {
-                var message = $"Couldn't find any remote tips from remote '{remote.Url}' pointing at the commit '{headTipSha}'.";
-                throw new WarningException(message);
-            }
-
-            if (refs.Count > 1)
-            {
-                var names = string.Join(", ", refs.Select(r => r.CanonicalName));
-                var message = $"Found more than one remote tip from remote '{remote.Url}' pointing at the commit '{headTipSha}'. Unable to determine which one to use ({names}).";
-                throw new WarningException(message);
+                case 0:
+                    {
+                        var message = $"Couldn't find any remote tips from remote '{remote.Url}' pointing at the commit '{headTipSha}'.";
+                        throw new WarningException(message);
+                    }
+                case > 1:
+                    {
+                        var names = string.Join(", ", refs.Select(r => r.CanonicalName));
+                        var message = $"Found more than one remote tip from remote '{remote.Url}' pointing at the commit '{headTipSha}'. Unable to determine which one to use ({names}).";
+                        throw new WarningException(message);
+                    }
             }
 
             var reference = refs.First();

@@ -1,6 +1,11 @@
 using GitTools.Testing;
 using GitVersion.BuildAgents;
 using GitVersion.Core.Tests;
+
+#if NET48
+using GitVersion.Extensions;
+#endif
+
 using GitVersion.MsBuild.Tests.Mocks;
 
 namespace GitVersion.MsBuild.Tests.Helpers;
@@ -73,9 +78,9 @@ public class MsBuildTaskFixture
     private static void SetEnvironmentVariables(KeyValuePair<string, string>[] envs)
     {
         if (envs == null) return;
-        foreach (var env in envs)
+        foreach (var (key, value) in envs)
         {
-            System.Environment.SetEnvironmentVariable(env.Key, env.Value);
+            System.Environment.SetEnvironmentVariable(key, value);
         }
     }
 }

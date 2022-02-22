@@ -27,12 +27,7 @@ public sealed class CodeBuild : BuildAgentBase
     {
         var currentBranch = Environment.GetEnvironmentVariable(WebHookEnvironmentVariableName);
 
-        if (currentBranch.IsNullOrEmpty())
-        {
-            return Environment.GetEnvironmentVariable(SourceVersionEnvironmentVariableName);
-        }
-
-        return currentBranch;
+        return currentBranch.IsNullOrEmpty() ? Environment.GetEnvironmentVariable(SourceVersionEnvironmentVariableName) : currentBranch;
     }
 
     public override void WriteIntegration(Action<string?> writer, VersionVariables variables, bool updateBuildNumber = true)

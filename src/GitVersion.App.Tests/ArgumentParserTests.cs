@@ -201,10 +201,10 @@ public class ArgumentParserTests : TestBase
     [Test]
     public void UrlAndBranchNameCanBeParsed()
     {
-        var arguments = this.argumentParser.ParseArguments("targetDirectoryPath -url http://github.com/Particular/GitVersion.git -b somebranch");
+        var arguments = this.argumentParser.ParseArguments("targetDirectoryPath -url https://github.com/Particular/GitVersion.git -b someBranch");
         arguments.TargetPath.ShouldBe("targetDirectoryPath");
-        arguments.TargetUrl.ShouldBe("http://github.com/Particular/GitVersion.git");
-        arguments.TargetBranch.ShouldBe("somebranch");
+        arguments.TargetUrl.ShouldBe("https://github.com/Particular/GitVersion.git");
+        arguments.TargetBranch.ShouldBe("someBranch");
         arguments.IsHelp.ShouldBe(false);
     }
 
@@ -255,7 +255,7 @@ public class ArgumentParserTests : TestBase
     }
 
     [TestCase("-updateAssemblyInfo Assembly.cs Assembly1.cs -ensureassemblyinfo")]
-    public void CreateMulitpleAssemblyInfoProtected(string command)
+    public void CreateMultipleAssemblyInfoProtected(string command)
     {
         var exception = Assert.Throws<WarningException>(() => this.argumentParser.ParseArguments(command));
         exception.Message.ShouldBe("Can't specify multiple assembly info files when using /ensureassemblyinfo switch, either use a single assembly info file or do not specify /ensureassemblyinfo and create assembly info files manually");
@@ -642,7 +642,7 @@ public class ArgumentParserTests : TestBase
     }
 
     [Test]
-    public void NonormilizeTrueWhenDefined()
+    public void NoNormalizeTrueWhenDefined()
     {
         var arguments = this.argumentParser.ParseArguments("-nonormalize");
         arguments.NoNormalize.ShouldBe(true);

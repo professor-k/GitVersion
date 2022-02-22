@@ -5,8 +5,8 @@ namespace GitVersion.Extensions;
 
 public static class StringExtensions
 {
-    private static readonly string[] Trues = new[] { "1", "true" };
-    private static readonly string[] Falses = new[] { "0", "false" };
+    private static readonly string[] Trues = { "1", "true" };
+    private static readonly string[] Falses = { "0", "false" };
 
     public static bool IsTrue(this string value) => Trues.Contains(value, StringComparer.OrdinalIgnoreCase);
 
@@ -97,8 +97,8 @@ public static class StringExtensions
         string.Equals(self, other, StringComparison.OrdinalIgnoreCase);
 
     /// <inheritdoc cref="string.IsNullOrEmpty"/>
-    public static bool IsNullOrEmpty([NotNullWhen(returnValue: false)] this string? value) => string.IsNullOrEmpty(value);
+    public static bool IsNullOrEmpty([NotNullWhen(false)] this string? value) => string.IsNullOrEmpty(value);
 
     /// <inheritdoc cref="string.IsNullOrWhiteSpace"/>
-    public static bool IsNullOrWhiteSpace([NotNullWhen(returnValue: false)] this string? value) => string.IsNullOrWhiteSpace(value);
+    public static bool IsNullOrWhiteSpace([NotNullWhen(false)] this string? value) => string.IsNullOrWhiteSpace(value);
 }

@@ -15,7 +15,7 @@ public class MergeMessage
         new("RemoteTracking", @"^Merge remote-tracking branch '(?<SourceBranch>[^\s]*)'(?: into (?<TargetBranch>[^\s]*))*")
     };
 
-    public MergeMessage(string mergeMessage, Config? config)
+    public MergeMessage(string? mergeMessage, Config? config)
     {
         if (mergeMessage == null)
             throw new NullReferenceException();

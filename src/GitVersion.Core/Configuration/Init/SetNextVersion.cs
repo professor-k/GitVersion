@@ -28,7 +28,7 @@ public class SetNextVersion : ConfigInitWizardStep
         return StepResult.Ok();
     }
 
-    protected override string GetPrompt(Config config, string workingDirectory) => @"What would you like to set the next version to (enter nothing to cancel)?";
+    protected override string GetPrompt(Config config, string workingDirectory) => "What would you like to set the next version to (enter nothing to cancel)?";
 
     protected override string? DefaultResult => null;
 }

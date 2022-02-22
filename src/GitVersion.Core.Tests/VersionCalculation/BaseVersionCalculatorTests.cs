@@ -181,12 +181,11 @@ public class BaseVersionCalculatorTests : TestBase
         {
             reason = null;
 
-            if (version.Source.Contains("exclude"))
-            {
-                reason = "was excluded";
-                return true;
-            }
-            return false;
+            if (!version.Source.Contains("exclude"))
+                return false;
+
+            reason = "was excluded";
+            return true;
         }
     }
 
