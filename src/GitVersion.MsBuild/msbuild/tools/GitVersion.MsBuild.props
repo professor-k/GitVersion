@@ -17,6 +17,7 @@
         <GitVersion_ToolArgments Condition=" '$(GitVersion_NoFetchEnabled)' == 'true' ">$(GitVersion_ToolArgments) -nofetch</GitVersion_ToolArgments>
         <GitVersion_ToolArgments Condition=" '$(GitVersion_NoNormalizeEnabled)' == 'true' ">$(GitVersion_ToolArgments) -nonormalize</GitVersion_ToolArgments>
         <GitVersion_ToolArgments Condition=" '$(GitVersion_NoCacheEnabled)' == 'true' ">$(GitVersion_ToolArgments) -nocache</GitVersion_ToolArgments>
+        <GitVersion_ToolArgments Condition=" '$(GitVersion_Config)' != '' ">$(GitVersion_ToolArgments) -config $(GitVersion_Config)</GitVersion_ToolArgments>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(MSBuildRuntimeType)' == 'Full' Or '$(MSBuildRuntimeType)' == 'Mono'">
